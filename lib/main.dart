@@ -14,14 +14,7 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   String _osVersion = "Unknown";
 
-  @override
-  void initState() {
-    super.initState();
-    // Call the native bridge when the app starts
-    _initNativeCall();
-  }
-
-  Future<void> _initNativeCall() async {
+  Future<void> _getDeviceVersion() async {
     final version = await NativeBridge.getDeviceVersion();
     if (mounted) {
       setState(() {
@@ -60,7 +53,7 @@ class _MainAppState extends State<MainApp> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: _initNativeCall, // Refresh on tap
+          onPressed: _getDeviceVersion, // Refresh on tap
           child: const Icon(Icons.refresh),
         ),
       ),
